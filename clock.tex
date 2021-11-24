@@ -3,12 +3,23 @@
 \usepackage[left=5mm,right=5mm,top=8.5mm,bottom=8.5mm]{geometry}
 \pagestyle{empty}
 \usepackage{tikz}
+\usetikzlibrary{
+    decorations.markings,
+    decorations.pathmorphing,
+    decorations.text,
+}
 \usepackage{eucal}
-% \usepackage{dozenal}
-
 \usepackage{contour}
 \contourlength{0.05mm}
-% \newcommand[1]{\cw}{\contour{white}{#1}}
+\usepackage{fontspec}
+\newfontface\textlino{QTLinoscroll}
+% \usepackage{yfonts}
+% \usepackage{dozenal}
+        
+
+\newcommand{\insR}{8mm}
+\newcommand{\midR}{20mm}
+\newcommand{\outR}{67mm}
 
 \begin{document}
 \begin{center}
@@ -22,10 +33,9 @@
     \draw (0,0) circle [radius=80mm];
     
     % NUMBERS
-    \draw[fill=black,draw=white,line width=.7mm]
-        (0:82mm)--(0:98mm) arc[start angle=360,end angle=180,radius=98mm]
-        --
-        (180:98mm)--(180:82mm) arc[start angle=180,end angle=360,radius=82mm];
+    \draw[fill=black,draw=white,line width=.8mm]
+        (180:82mm) -- (180:98mm) arc (180:360:98mm)
+        (360:98mm) -- (360:82mm) arc (360:180:82mm);
     \begin{scope}[every node/.style={scale=7,inner sep=0pt}]
         \node[rotate=165]          at (255:90mm-.15mm) {\contour{white}{1}};
         \node[rotate=150]          at (240:90mm-.15mm) {\contour{white}{2}};
@@ -59,26 +69,57 @@
     \draw [line width=2mm] (0,0) circle [radius=100mm-1mm];
     \draw [line width=2mm] (0,0) circle [radius=80mm+1mm];
 
-
     % FACE
+    % Sectors
+    \foreach \lcolor/\lwidth in {black/2.6mm,white/2mm} {
+    \begin{scope}[every path/.style={draw=\lcolor,line width=\lwidth}]
+        \draw (180:\insR)   -- (180:\outR)   arc(180:150:\outR)     --
+              (150:\outR)   -- (150:\midR)   arc(150:127.5:\midR)   --
+              (127.5:\midR) -- (127.5:\outR) arc(127.5:90:\outR)    --
+              (90:\outR)    -- (90:\midR)    arc(90:67.5:\midR)     --
+              (67.5:\midR)  -- (67.5:\outR)  arc(67.5:0:\outR)      --
+              (0:\outR)     -- (0:\insR)     arc(0:180:\insR)       ;
+        \draw (0:\insR)     -- (0:\outR)     arc(0:-60:\outR)       --
+              (-60:\outR)   -- (-60:\insR)   arc(-60:0:\insR)       ;
+        \draw (300:\insR)   -- (300:\outR)   arc(300:180:\outR)     --
+              (180:\outR)   -- (180:\insR)   arc(180:300:\insR)     ;
+        \draw (150:\midR)   -- (150:\outR)   arc(150:127.5:\outR)   --
+              (127.5:\outR) -- (127.5:\midR) arc(127.5:150:\midR)   ;
+        \draw (67.5:\midR)  -- (67.5:\outR)  arc(67.5:90:\outR)     --
+              (90:\outR)    -- (90:\midR)    arc(90:67.5:\midR)     ;
+    \end{scope}
+    }
+    % (Cover up external lines)
+    \draw[line width=1mm,draw=white] (0,0) circle (\outR+1.15mm);
+    \draw[line width=1mm,draw=white] (0,0) circle (\insR-1.15mm);
+    % Labels
+    \foreach \phi/\label in {180/Write,153.75/Morn,123.75/Read,93.75/Noon,%
+        48.75/Work,345/Eve,225/Sleep} {
+        \path[postaction={decorate,decoration={text align={center},%
+            raise={4mm},text along path,text={|\Huge\textlino|\label}}}]
+            (\phi:\outR) arc (\phi:\phi-30:\outR);
+        }
+    % arc(0:-60:\outR) node[pos=0.25,sloped,above] {Evening}
+    % arc(300:180:\outR) node[pos=0.875,sloped,above] {Sleeping}
 \end{tikzpicture}
 \end{center}
         
+% \section{Testing}
+% VARIOUS KINDS OF LINES
 % line from edge in
 % \draw (\angle:76mm) -- (\angle:80mm);
-
+% VARIOUS DIVISIONS OF CIRCLE
 % 96ths
 % \foreach \angle in {-90,-86.25,...,266.25}
 %     \draw[fill] (\angle:77.5mm) circle [radius=0.5mm];
-
 % 24ths
 % \foreach \angle in {-90,-75,...,255}
 %     \draw[fill] (\angle:77.5mm) circle [radius=1.5mm];
-
-% \section{Testing}
+% VARIOUS FONTS
 % %Frak: \textfrak{1 2 3 4 5 6 7 8 9 X Y Z x y z \etc}
 % %Goth: \textgoth{1 2 3 4 5 6 7 8 9 X Y Z x y z}
 % %Swab: \textswab{1 2 3 4 5 6 7 8 9 X Y Z x y z}
+% VARIOUS TRANSDECIMALS
 % \begin{center}
 % \begin{tikzpicture}[every node/.style={scale=7}]
 % \node at (-25mm,0) {23};
