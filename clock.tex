@@ -1,0 +1,94 @@
+\documentclass[a4paper]{article}
+
+\usepackage[left=5mm,right=5mm,top=8.5mm,bottom=8.5mm]{geometry}
+\pagestyle{empty}
+\usepackage{tikz}
+\usepackage{eucal}
+% \usepackage{dozenal}
+
+\usepackage{contour}
+\contourlength{0.05mm}
+% \newcommand[1]{\cw}{\contour{white}{#1}}
+
+\begin{document}
+\begin{center}
+\begin{tikzpicture}
+    % BORDER
+    \draw[dashed] (-100mm,-100mm) rectangle (100mm,100mm);
+    \draw[dashed] (0,0) circle [radius=3mm];
+
+    % SECTIONS
+    \draw (0,0) circle [radius=100mm];
+    \draw (0,0) circle [radius=80mm];
+    
+    % NUMBERS
+    \draw[fill=black,draw=white,line width=.7mm]
+        (0:82mm)--(0:98mm) arc[start angle=360,end angle=180,radius=98mm]
+        --
+        (180:98mm)--(180:82mm) arc[start angle=180,end angle=360,radius=82mm];
+    \begin{scope}[every node/.style={scale=7,inner sep=0pt}]
+        \node[rotate=165]          at (255:90mm-.15mm) {\contour{white}{1}};
+        \node[rotate=150]          at (240:90mm-.15mm) {\contour{white}{2}};
+        \node[rotate=135]          at (225:90mm-.15mm) {\contour{white}{3}};
+        \node[rotate=120]          at (210:90mm-.15mm) {\contour{white}{4}};
+        \node[rotate=105]          at (195:90mm-.15mm) {\contour{white}{5}};
+        \node[rotate= 90]          at (180:90mm-.15mm) {\contour{white}{6}};
+        \node[rotate= 75]          at (165:90mm-.15mm) {7};
+        \node[rotate= 60]          at (150:90mm-.15mm) {8};
+        \node[rotate= 45]          at (135:90mm-.15mm) {9};
+        \node[rotate= 30]          at (120:90mm-.15mm) {$\mathcal{X}$};
+        \node[rotate= 15,xscale=-1]at (105:90mm-.15mm) {3};
+        \node[rotate=  0]          at ( 90:90mm-.15mm) {0};
+        \node[rotate=-15]          at ( 75:90mm-.15mm) {1};
+        \node[rotate=-30]          at ( 60:90mm-.15mm) {2};
+        \node[rotate=-45]          at ( 45:90mm-.15mm) {3};
+        \node[rotate=-60]          at ( 30:90mm-.15mm) {4};
+        \node[rotate=-75]          at ( 15:90mm-.15mm) {5};
+        \node[rotate=270]          at (  0:90mm-.15mm) {\contour{white}{6}};
+        \node[rotate=255]          at (-15:90mm-.15mm) {\contour{white}{7}};
+        \node[rotate=240]          at (-30:90mm-.15mm) {\contour{white}{8}};
+        \node[rotate=225]          at (-45:90mm-.15mm) {\contour{white}{9}};
+        \node[rotate=210]          at (-60:90mm-.15mm) {\contour{white}{$\mathcal{X}$}};
+        \node[rotate=195,xscale=-1]at (-75:90mm-.15mm) {\contour{white}{3}};
+        \node[rotate=180]          at (-90:90mm-.15mm) {\contour{white}{0}};
+    \end{scope}
+    \foreach \angle in {-90,-75,...,255} { % 24ths
+        \draw[fill,draw=white,line width=.3mm]
+            (\angle+7.5:90mm) circle [radius=1.5mm];
+    }
+    \draw [line width=2mm] (0,0) circle [radius=100mm-1mm];
+    \draw [line width=2mm] (0,0) circle [radius=80mm+1mm];
+
+
+    % FACE
+\end{tikzpicture}
+\end{center}
+        
+% line from edge in
+% \draw (\angle:76mm) -- (\angle:80mm);
+
+% 96ths
+% \foreach \angle in {-90,-86.25,...,266.25}
+%     \draw[fill] (\angle:77.5mm) circle [radius=0.5mm];
+
+% 24ths
+% \foreach \angle in {-90,-75,...,255}
+%     \draw[fill] (\angle:77.5mm) circle [radius=1.5mm];
+
+% \section{Testing}
+% %Frak: \textfrak{1 2 3 4 5 6 7 8 9 X Y Z x y z \etc}
+% %Goth: \textgoth{1 2 3 4 5 6 7 8 9 X Y Z x y z}
+% %Swab: \textswab{1 2 3 4 5 6 7 8 9 X Y Z x y z}
+% \begin{center}
+% \begin{tikzpicture}[every node/.style={scale=7}]
+% \node at (-25mm,0) {23};
+% \node[yscale=-1,xscale=-1] at (-6mm,0) {2};
+% \node[xscale=-1] at (+6mm,0) {3};
+% \node at (+25mm,0) {\x\e};
+% % \node at (0,+25mm) {\textturnthree\textturntwo};
+% \node at (0,-25mm) {$\mathcal{XE}$};
+% \node at (+25mm,-25mm) {$\chi\mathcal{E}$};
+% \end{tikzpicture}
+% \end{center}
+
+\end{document}
