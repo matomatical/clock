@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article}
+\documentclass[a3paper]{article}
 
 \usepackage[left=5mm,right=5mm,top=8.5mm,bottom=8.5mm]{geometry}
 \pagestyle{empty}
@@ -8,6 +8,7 @@
     decorations.pathmorphing,
     decorations.text,
 }
+\usepackage{graphicx}
 \usepackage{eucal}
 \usepackage{contour}
 \contourlength{0.05mm}
@@ -15,57 +16,70 @@
 \newfontface\textlino{QTLinoscroll}
 % \usepackage{yfonts}
 % \usepackage{dozenal}
-        
 
 \newcommand{\insR}{8mm}
 \newcommand{\midR}{20mm}
 \newcommand{\outR}{67mm}
+\newcommand{\E}{\reflectbox{3}}
+\newcommand{\X}{$\mathcal{X}$}
 
 \begin{document}
 \begin{center}
 \begin{tikzpicture}
     % BORDER
-    \draw[dashed] (-100mm,-100mm) rectangle (100mm,100mm);
+    \draw[dashed] (-110mm,-110mm) rectangle (110mm,110mm);
     \draw[dashed] (0,0) circle [radius=3mm];
 
-    % SECTIONS
-    \draw (0,0) circle [radius=100mm];
-    \draw (0,0) circle [radius=80mm];
+    % OUTER RING
+    % Background
+    \draw[fill=black,draw=white,line width=.4mm]
+        (180:101.5mm) -- (180:108.5mm) arc (180:360:108.5mm)
+        (360:108.5mm) -- (360:101.5mm) arc (360:180:101.5mm);
+    % Numerals
+    \foreach \angle/\label in {%
+            270/0,255/1,240/2,225/3,210/4,195/5,%
+            180/6,165/7,150/8,135/9,120/\X,105/\E%
+    } {
+        \node[rotate=\angle-90,scale=3,inner sep=0pt]
+            at (\angle:105mm) {\contour{white}{\label}};
+        \node[rotate=\angle+90,scale=3,inner sep=0pt]
+            at (\angle-180:105mm) {\contour{white}{\label}};
+    }
+    % Borders
+    \draw [line width=1mm] (0,0) circle [radius=110mm-1mm];
+    \draw [line width=1mm] (0,0) circle [radius=100mm+1mm];
+    \foreach \angle/\tz in {%
+            270/Melbourne%
+    } {
+        \path[postaction={decorate,decoration={text align={center},%
+            raise={-2mm},text along path,text={|\small\color{white}|\tz}}}]
+            (\angle+15:105mm) arc (\angle+15:\angle:105mm);
+        \path[fill=white]
+            (\angle+7.5:100.4mm)--(\angle+7:101.7mm)--(\angle+8:101.7mm);
+        
+    }
     
     % NUMBERS
+    % Background
     \draw[fill=black,draw=white,line width=.8mm]
         (180:82mm) -- (180:98mm) arc (180:360:98mm)
         (360:98mm) -- (360:82mm) arc (360:180:82mm);
-    \begin{scope}[every node/.style={scale=7,inner sep=0pt}]
-        \node[rotate=165]          at (255:90mm-.15mm) {\contour{white}{1}};
-        \node[rotate=150]          at (240:90mm-.15mm) {\contour{white}{2}};
-        \node[rotate=135]          at (225:90mm-.15mm) {\contour{white}{3}};
-        \node[rotate=120]          at (210:90mm-.15mm) {\contour{white}{4}};
-        \node[rotate=105]          at (195:90mm-.15mm) {\contour{white}{5}};
-        \node[rotate= 90]          at (180:90mm-.15mm) {\contour{white}{6}};
-        \node[rotate= 75]          at (165:90mm-.15mm) {7};
-        \node[rotate= 60]          at (150:90mm-.15mm) {8};
-        \node[rotate= 45]          at (135:90mm-.15mm) {9};
-        \node[rotate= 30]          at (120:90mm-.15mm) {$\mathcal{X}$};
-        \node[rotate= 15,xscale=-1]at (105:90mm-.15mm) {3};
-        \node[rotate=  0]          at ( 90:90mm-.15mm) {0};
-        \node[rotate=-15]          at ( 75:90mm-.15mm) {1};
-        \node[rotate=-30]          at ( 60:90mm-.15mm) {2};
-        \node[rotate=-45]          at ( 45:90mm-.15mm) {3};
-        \node[rotate=-60]          at ( 30:90mm-.15mm) {4};
-        \node[rotate=-75]          at ( 15:90mm-.15mm) {5};
-        \node[rotate=270]          at (  0:90mm-.15mm) {\contour{white}{6}};
-        \node[rotate=255]          at (-15:90mm-.15mm) {\contour{white}{7}};
-        \node[rotate=240]          at (-30:90mm-.15mm) {\contour{white}{8}};
-        \node[rotate=225]          at (-45:90mm-.15mm) {\contour{white}{9}};
-        \node[rotate=210]          at (-60:90mm-.15mm) {\contour{white}{$\mathcal{X}$}};
-        \node[rotate=195,xscale=-1]at (-75:90mm-.15mm) {\contour{white}{3}};
-        \node[rotate=180]          at (-90:90mm-.15mm) {\contour{white}{0}};
-    \end{scope}
+    % Numerals
+    \foreach \angle/\label in {%
+            270/0,255/1,240/2,225/3,210/4,195/5,%
+            180/6,165/7,150/8,135/9,120/\X,105/\E%
+    } {
+        \node[rotate=\angle-90,scale=7,inner sep=0pt]
+            at (\angle:90mm-.15mm) {\contour{white}{\label}};
+        \node[rotate=\angle+90,scale=7,inner sep=0pt]
+            at (\angle-180:90mm-.15mm) {\contour{white}{\label}};
+    }
+    % Little Circles
     \foreach \angle in {-90,-75,...,255} { % 24ths
         \draw[fill,draw=white,line width=.3mm]
             (\angle+7.5:90mm) circle [radius=1.5mm];
     }
+    % Borders
     \draw [line width=2mm] (0,0) circle [radius=100mm-1mm];
     \draw [line width=2mm] (0,0) circle [radius=80mm+1mm];
 
@@ -101,24 +115,13 @@
         }
     % arc(0:-60:\outR) node[pos=0.25,sloped,above] {Evening}
     % arc(300:180:\outR) node[pos=0.875,sloped,above] {Sleeping}
+
+    % POINTER
+    \path[fill=white] (277.5:100.1mm) -- (276.5:97.9mm) -- (278.5:97.9mm);
+    
 \end{tikzpicture}
 \end{center}
         
-% \section{Testing}
-% VARIOUS KINDS OF LINES
-% line from edge in
-% \draw (\angle:76mm) -- (\angle:80mm);
-% VARIOUS DIVISIONS OF CIRCLE
-% 96ths
-% \foreach \angle in {-90,-86.25,...,266.25}
-%     \draw[fill] (\angle:77.5mm) circle [radius=0.5mm];
-% 24ths
-% \foreach \angle in {-90,-75,...,255}
-%     \draw[fill] (\angle:77.5mm) circle [radius=1.5mm];
-% VARIOUS FONTS
-% %Frak: \textfrak{1 2 3 4 5 6 7 8 9 X Y Z x y z \etc}
-% %Goth: \textgoth{1 2 3 4 5 6 7 8 9 X Y Z x y z}
-% %Swab: \textswab{1 2 3 4 5 6 7 8 9 X Y Z x y z}
 % VARIOUS TRANSDECIMALS
 % \begin{center}
 % \begin{tikzpicture}[every node/.style={scale=7}]
