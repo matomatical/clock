@@ -11,6 +11,7 @@ and a few other things.
 * A second dial shows a time in another time zone with a configurable offset,
   for immediate time reading across time zones.
 
+
 Project notes
 -------------
 
@@ -73,6 +74,22 @@ Fonts
 * Gothic font: https://tug.org/FontCatalogue/hersheyoldenglishfont/
 * Black sans-serif font: https://tug.org/FontCatalogue/qthelvetblack/
 * Regular sans-serif font: https://tug.org/FontCatalogue/cabin/
+
+
+Clock parts
+-----------
+
+Apart from the face, I ordered the clock parts from letsmaketime in
+Queensland.
+
+* [24hr clock movement](https://www.letsmaketime.com.au/shop/item/24-hour-clock-movement-3mm-6mm---qc-24/high-torque)
+* [Clock hands](https://www.letsmaketime.com.au/shop/item/retro-german-clock-hands-147mm)
+  (I'll use just the hour hand, I guess).
+
+Looking for bezels. Considering:
+
+* https://www.letsmaketime.com.au/shop/item/hinged-dial-glassbrass-bezel-ivory-arabic-215-copy
+* https://www.letsmaketime.com.au/shop/item/hinged-dial-with-brass-bezel-ivory-roman (a little big...!)
 
 License
 -------

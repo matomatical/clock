@@ -9,7 +9,7 @@
 }
 \usepackage{graphicx}
 \usepackage{contour}
-\contourlength{0.05mm}
+\contourlength{0.05mm} % important and fragile magic number!
 
 % FONTS
 \usepackage{addfont}
@@ -23,7 +23,7 @@
 \noindent\begin{tikzpicture}
     % BORDER
     \draw[dashed] (-100mm,-100mm) rectangle (100mm,100mm);
-    \draw[dashed] (-110mm,-110mm) rectangle (110mm,110mm);
+    \draw[dashed] (0,0) circle (110mm);
     \draw[dashed] (0,0) circle [radius=3mm];
     \draw[dashed] (0,0) circle [radius=20mm];
     
@@ -99,13 +99,13 @@
     }
 
     % PANEL
-    \node at (270:48mm) {\includegraphics[width=30mm]{sign.png}};
-    % move this down?
+    % signature
+    \node at (270:49mm) {\includegraphics[width=30mm]{sign.png}};
+    % title
     \path[postaction={decorate,decoration={text align={center},%
         text along path,text={|\Large\textblack|24 HOUR WORLD CLOCK}}}]
         (240:75mm) arc (240:300:75mm);
-    \fill (270:68mm) -- (271:70mm) -- (269:70mm);
-    \fill (270:58mm) -- (271:56mm) -- (269:56mm);
+    % offset information and blank
     \draw[dashed,line width=0.3mm]
         (262.5:68mm) -- (262.5:58mm) arc(262.5:277.5:58mm) --
         (277.5:58mm) -- (277.5:68mm) arc(277.5:262.5:68mm) ;
@@ -115,12 +115,13 @@
     \path[postaction={decorate,decoration={text align={left},text along
         path,text={|\sffamily|FROM LOCAL}}}]
         (280:64mm) arc (280:300:64mm);
+    \fill (270:68mm) -- (271:70mm) -- (269:70mm);
+
     % THE EXAMPLE
     \path[postaction={decorate,decoration={text align={center},text along
-        path,text={|\sffamily|+00/-24}}}]
+        path,text={|\sffamily|+24/0/-24}}}]
         (262.5:64mm) arc (262.5:277.5:64mm);
     \fill (270:68mm) -- (271:66mm) -- (269:66mm);
-    \fill (270:58mm) -- (271:60mm) -- (269:60mm);
 \end{tikzpicture}
     
 \begin{tikzpicture}
@@ -132,17 +133,20 @@
     % INNER TIMEZONE ALIGNMENT
     % Timezones
     \foreach [count=\i] \plus/\minus in {%
-            00/24,01/23,02/22,03/21,04/20,05/19,
-            06/18,07/17,08/16,09/15,10/14,11/13,
-            12/12,13/11,14/10,15/09,16/08,17/07,
-            18/06,19/05,20/04,21/03,22/02,23/01%
+            01/23,02/22,03/21,04/20,05/19,06/18,%
+            07/17,08/16,09/15,10/14,11/13,12/12,%
+            13/11,14/10,15/09,16/08,17/07,18/06,%
+            19/05,20/04,21/03,22/02,23/01%
     } {
         \path[postaction={decorate,decoration={text align={center},text
             along path,text={|\sffamily|+\plus/-\minus}}}]
-            (247.5+15*\i:64mm) arc (247.5+15*\i:262.5+15*\i:64mm);
+            (262.5-15*\i:64mm) arc (262.5-15*\i:277.5-15*\i:64mm);
         \fill (270+15*\i:68mm) -- (271+15*\i:66mm) -- (269+15*\i:66mm);
-        \fill (270+15*\i:58mm) -- (271+15*\i:60mm) -- (269+15*\i:60mm);
     }
+    \path[postaction={decorate,decoration={text align={center},text
+        along path,text={|\sffamily|+24/0/-24}}}]
+        (262.5:64mm) arc (262.5:277.5:64mm);
+    \fill (270:68mm) -- (271:66mm) -- (269:66mm);
     
     % OUTER RIM
     % Background
