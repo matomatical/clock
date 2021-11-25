@@ -1,0 +1,127 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=5mm]{geometry}
+\pagestyle{empty}
+\usepackage{tikz}
+\usetikzlibrary{
+    decorations.markings,
+    decorations.pathmorphing,
+    decorations.text,
+}
+\usepackage{graphicx}
+\usepackage{contour}
+\contourlength{0.05mm} % important and fragile magic number!
+
+% FONTS
+\usepackage{addfont}
+\addfont[1]{OT1}{hge}{\textgothic}
+\usepackage{fontspec}
+\newfontface\textblack{QTHelvet-Black}
+\usepackage{cabin}
+
+
+\begin{document}
+\noindent\begin{tikzpicture}
+    % BORDER
+    \draw[dashed] (-100mm,-100mm) rectangle (100mm,100mm);
+    \draw[dashed] (0,0) circle [radius=3mm];
+    \draw[dashed] (0,0) circle [radius=20mm];
+    
+    % NUMBERS
+    % Background
+    \draw[fill=black,draw=white,line width=.8mm]
+        (180:82mm) -- (180:98mm) arc (180:360:98mm)
+        (360:98mm) -- (360:82mm) arc (360:180:82mm);
+    % Numerals
+    \foreach \angle/\label/\xscale in {%
+            270/0/1,255/1/1,240/2/1,225/3/1,210/4/1,195/5/1,%
+            180/6/1,165/7/1,150/8/1,135/9/1,120/X/1,105/3/-1%
+    } {
+        \node[rotate=\angle-90,scale=7,inner sep=0pt,xscale=\xscale]
+            at (\angle:90mm-.15mm) {\contour{white}{\label}};
+        \node[rotate=\angle+90,scale=7,inner sep=0pt,xscale=\xscale]
+            at (\angle-180:90mm-.15mm) {\contour{white}{\label}};
+    }
+    % Little Circles
+    \foreach \angle in {-90,-75,...,255} { % 24ths
+        \draw[fill,draw=white,line width=.3mm]
+            (\angle+7.5:90mm) circle [radius=1.5mm];
+    }
+    % Borders
+    \draw [line width=2mm] (0,0) circle [radius=100mm-1mm];
+    \draw [line width=2mm] (0,0) circle [radius=80mm+1mm];
+
+    % FACE
+    \newcommand{\insR}{25mm}
+    \newcommand{\midR}{42mm}
+    \newcommand{\outR}{67mm}
+    % Rim
+    \draw[line width=0.3mm] (0,0) circle (\outR-2.3mm-1.3mm);
+    \foreach \angle in {0,7.5,...,353.5} {
+        \draw[line width=0.3mm]
+            (\angle:\outR-1.3mm) -- (\angle:\outR-1.3mm-2.3mm)
+            (\angle+3.75:\outR-1.3mm) -- (\angle+3.75:\outR-1.3mm-1.15mm);
+    }
+    % Sectors
+    \foreach \lcolor/\lwidth in {black/2.6mm,white/2mm} {
+    \begin{scope}[every path/.style={draw=\lcolor,line width=\lwidth}]
+        \draw (180:\insR)   -- (180:\outR)   arc(180:150:\outR)     --
+              (150:\outR)   -- (150:\midR)   arc(150:127.5:\midR)   --
+              (127.5:\midR) -- (127.5:\outR) arc(127.5:90:\outR)    --
+              (90:\outR)    -- (90:\midR)    arc(90:67.5:\midR)     --
+              (67.5:\midR)  -- (67.5:\outR)  arc(67.5:0:\outR)      --
+              (0:\outR)     -- (0:\insR)     arc(0:180:\insR)       ;
+        \draw (0:\insR)     -- (0:\outR)     arc(0:-60:\outR)       --
+              (-60:\outR)   -- (-60:\insR)   arc(-60:0:\insR)       ;
+        \draw (300:\insR)   -- (300:\midR)   arc(300:240:\midR)     --
+              (240:\midR)   -- (240:\outR)   arc(240:180:\outR)     --
+              (180:\outR)   -- (180:\insR)   arc(180:300:\insR)     ;
+        \draw (150:\midR)   -- (150:\outR)   arc(150:127.5:\outR)   --
+              (127.5:\outR) -- (127.5:\midR) arc(127.5:150:\midR)   ;
+        \draw (67.5:\midR)  -- (67.5:\outR)  arc(67.5:90:\outR)     --
+              (90:\outR)    -- (90:\midR)    arc(90:67.5:\midR)     ;
+    \end{scope}
+    }
+    % (Cover up external lines)
+    \newcommand{\clearcol}{white}
+    % \renewcommand{\clearcol}{green}
+    \draw[line width=1mm,draw=\clearcol] (0,0) circle (\outR+1.15mm);
+    \draw[line width=1mm,draw=\clearcol] (0,0) circle (\insR-1.15mm);
+    \path[fill=\clearcol]
+        (300:\midR) -- (300:\outR+1.3mm) arc(300:240:\outR+1.3mm) --
+        (240:\outR+1.3mm) -- (240:\midR) arc(240:300:\midR);
+    % Labels
+    \foreach \phi/\label in {180/Write,153.75/Morn,123.75/Read,93.75/Noon,%
+        48.75/Work,345/Eve,225/Sleep} {
+        \path[postaction={decorate,decoration={text align={center},%
+            raise={4mm},text along path,text={|\huge\textgothic|\label}}}]
+            (\phi:\outR) arc (\phi:\phi-30:\outR);
+    }
+
+    % PANEL
+    % signature
+    \node at (270:49mm) {\includegraphics[width=30mm]{sign.png}};
+    % title
+    \path[postaction={decorate,decoration={text align={center},%
+        text along path,text={|\Large\textblack|24 HOUR WORLD CLOCK}}}]
+        (240:75mm) arc (240:300:75mm);
+    % offset information and blank
+    \draw[dashed,line width=0.3mm]
+        (262.5:68mm) -- (262.5:58mm) arc(262.5:277.5:58mm) --
+        (277.5:58mm) -- (277.5:68mm) arc(277.5:262.5:68mm) ;
+    \path[postaction={decorate,decoration={text align={right},text along
+        path,text={|\sffamily|RIM OFFSET}}}]
+        (240:64mm) arc (240:260:64mm);
+    \path[postaction={decorate,decoration={text align={left},text along
+        path,text={|\sffamily|FROM LOCAL}}}]
+        (280:64mm) arc (280:300:64mm);
+    \fill (270:68mm) -- (271:70mm) -- (269:70mm);
+
+    % THE EXAMPLE
+    \path[postaction={decorate,decoration={text align={center},text along
+        path,text={|\sffamily|+24/0/-24}}}]
+        (262.5:64mm) arc (262.5:277.5:64mm);
+    \fill (270:68mm) -- (271:66mm) -- (269:66mm);
+\end{tikzpicture}
+
+\end{document}
