@@ -31,6 +31,26 @@ looks something like this:
 Design notes
 ------------
 
+**A dozen numerals**
+
+The numerals use a [dozenal](https://en.wikipedia.org/wiki/Duodecimal) (base
+12) system, because I prefer the look, and I'm the only one who has to read
+this clock. I'm using letters X for ten and E (reflected 3) for eleven.
+
+![](numerals.png)
+
+I don't really like the popular conventions for the transdecimal numerals
+ten and eleven (though I understand their appeal and accept their popularity).
+For what it's worth, I might propose using X for ten, Y for eleven, and Z for
+twelve (if a symbol other than 10 were needed), pronounced "dex, (ele)vyn,
+doz".
+X, Y, Z shares the alphabetic sequence; X matches the roman numeral for ten,
+and Z is for zwölf (german for twelve) as well as a prominent letter in the
+word 'dozen'.
+Accordingly, I would use the letter z to denote base-12 literals in
+programming (as in 0z10X = 154).
+But nobody is asking me :).
+
 **A readable world clock.**
 
 Digital world clocks show the *current* time in multiple places, but to figure
@@ -45,27 +65,7 @@ status, since it's a 24 hour clock).
 The world time at any other local time can be readily assessed by looking at
 other points around the dial.
 
-TODO: Diagram with various offsets.
-
-**A dozen numerals**
-
-The numerals use a [dozenal](https://en.wikipedia.org/wiki/Duodecimal) (base
-12) system, because I prefer the look, and I'm the only one who has to read
-this clock. I'm using letters X for ten and E (reflected 3) for eleven.
-
-TODO: Diagram with numerals
-
-I don't really like the popular conventions for the transdecimal numerals
-ten and eleven (though I understand their appeal and accept their popularity).
-For what it's worth, I might propose using X for ten, Y for eleven, and Z for
-twelve (if a symbol other than 10 were needed), pronounced "dex, (ele)vyn,
-doz".
-X, Y, Z shares the alphabetic sequence; X matches the roman numeral for ten,
-and Z is for zwölf (german for twelve) as well as a prominent letter in the
-word 'dozen'.
-Accordingly, I would use the letter z to denote base-12 literals in
-programming (as in 0z10X = 154).
-But nobody is asking me :).
+![](dials.png)
 
 
 Fonts
