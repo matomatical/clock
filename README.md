@@ -11,14 +11,13 @@ and a few other things.
 * A second dial shows a time in another time zone with a configurable offset,
   for immediate time reading across time zones.
 
-
 Project notes
 -------------
 
 TODO List:
 
 * [x] Select and order 24 hour mechanism and clock hands
-* [ ] Design clock face and dial (WIP!)
+* [x] Design clock face and dial
 * [ ] Print clock face and assemble clock
 * [ ] Incorporate into wall dashboard (with barometer and thermometer)
 
@@ -51,7 +50,7 @@ TODO: Diagram with various offsets.
 
 The numerals use a [dozenal](https://en.wikipedia.org/wiki/Duodecimal) (base
 12) system, because I prefer the look, and I'm the only one who has to read
-this clock. I'm using caligraphic letters X for ten and E for eleven.
+this clock. I'm using letters X for ten and E (reflected 3) for eleven.
 
 TODO: Diagram with numerals
 
@@ -65,10 +64,19 @@ and Z is for zwölf (german for twelve) as well as a prominent letter in the
 word 'dozen'.
 Accordingly, I would use the letter z to denote base-12 literals in
 programming (as in 0z10X = 154).
+But nobody is asking me :).
 
+
+Fonts
+-----
+
+* Gothic font: https://tug.org/FontCatalogue/hersheyoldenglishfont/
+* Black sans-serif font: https://tug.org/FontCatalogue/qthelvetblack/
+* Regular sans-serif font: https://tug.org/FontCatalogue/cabin/
 
 License
 -------
 
-My idea for this configurable world clock dual dial design is hereby
+My idea for this configurable 24 hour world clock dual dial design is hereby
 dedicated to the public domain.
+

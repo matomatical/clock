@@ -1,0 +1,11 @@
+# xelatex/latexmk
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.xdv
+# metafont
+*.log
+*.*pk
+*.*gf
+*.tfm

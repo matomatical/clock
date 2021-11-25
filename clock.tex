@@ -1,6 +1,5 @@
-\documentclass[a3paper]{article}
+\documentclass{standalone}
 
-\usepackage[left=5mm,right=5mm,top=8.5mm,bottom=8.5mm]{geometry}
 \pagestyle{empty}
 \usepackage{tikz}
 \usetikzlibrary{
@@ -9,55 +8,24 @@
     decorations.text,
 }
 \usepackage{graphicx}
-\usepackage{eucal}
 \usepackage{contour}
 \contourlength{0.05mm}
-\usepackage{fontspec}
-\newfontface\textlino{QTLinoscroll}
-% \usepackage{yfonts}
-% \usepackage{dozenal}
 
-\newcommand{\insR}{8mm}
-\newcommand{\midR}{20mm}
-\newcommand{\outR}{67mm}
-\newcommand{\E}{\reflectbox{3}}
-\newcommand{\X}{$\mathcal{X}$}
+% FONTS
+\usepackage{addfont}
+\addfont[1]{OT1}{hge}{\textgothic}
+\usepackage{fontspec}
+\newfontface\textblack{QTHelvet-Black}
+\usepackage{cabin}
+
 
 \begin{document}
-\begin{center}
-\begin{tikzpicture}
+\noindent\begin{tikzpicture}
     % BORDER
+    \draw[dashed] (-100mm,-100mm) rectangle (100mm,100mm);
     \draw[dashed] (-110mm,-110mm) rectangle (110mm,110mm);
     \draw[dashed] (0,0) circle [radius=3mm];
-
-    % OUTER RING
-    % Background
-    \draw[fill=black,draw=white,line width=.4mm]
-        (180:101.5mm) -- (180:108.5mm) arc (180:360:108.5mm)
-        (360:108.5mm) -- (360:101.5mm) arc (360:180:101.5mm);
-    % Numerals
-    \foreach \angle/\label in {%
-            270/0,255/1,240/2,225/3,210/4,195/5,%
-            180/6,165/7,150/8,135/9,120/\X,105/\E%
-    } {
-        \node[rotate=\angle-90,scale=3,inner sep=0pt]
-            at (\angle:105mm) {\contour{white}{\label}};
-        \node[rotate=\angle+90,scale=3,inner sep=0pt]
-            at (\angle-180:105mm) {\contour{white}{\label}};
-    }
-    % Borders
-    \draw [line width=1mm] (0,0) circle [radius=110mm-1mm];
-    \draw [line width=1mm] (0,0) circle [radius=100mm+1mm];
-    \foreach \angle/\tz in {%
-            270/Melbourne%
-    } {
-        \path[postaction={decorate,decoration={text align={center},%
-            raise={-2mm},text along path,text={|\small\color{white}|\tz}}}]
-            (\angle+15:105mm) arc (\angle+15:\angle:105mm);
-        \path[fill=white]
-            (\angle+7.5:100.4mm)--(\angle+7:101.7mm)--(\angle+8:101.7mm);
-        
-    }
+    \draw[dashed] (0,0) circle [radius=20mm];
     
     % NUMBERS
     % Background
@@ -65,13 +33,13 @@
         (180:82mm) -- (180:98mm) arc (180:360:98mm)
         (360:98mm) -- (360:82mm) arc (360:180:82mm);
     % Numerals
-    \foreach \angle/\label in {%
-            270/0,255/1,240/2,225/3,210/4,195/5,%
-            180/6,165/7,150/8,135/9,120/\X,105/\E%
+    \foreach \angle/\label/\xscale in {%
+            270/0/1,255/1/1,240/2/1,225/3/1,210/4/1,195/5/1,%
+            180/6/1,165/7/1,150/8/1,135/9/1,120/X/1,105/3/-1%
     } {
-        \node[rotate=\angle-90,scale=7,inner sep=0pt]
+        \node[rotate=\angle-90,scale=7,inner sep=0pt,xscale=\xscale]
             at (\angle:90mm-.15mm) {\contour{white}{\label}};
-        \node[rotate=\angle+90,scale=7,inner sep=0pt]
+        \node[rotate=\angle+90,scale=7,inner sep=0pt,xscale=\xscale]
             at (\angle-180:90mm-.15mm) {\contour{white}{\label}};
     }
     % Little Circles
@@ -84,6 +52,16 @@
     \draw [line width=2mm] (0,0) circle [radius=80mm+1mm];
 
     % FACE
+    \newcommand{\insR}{25mm}
+    \newcommand{\midR}{42mm}
+    \newcommand{\outR}{67mm}
+    % Rim
+    \draw[line width=0.3mm] (0,0) circle (\outR-2.3mm-1.3mm);
+    \foreach \angle in {0,7.5,...,353.5} {
+        \draw[line width=0.3mm]
+            (\angle:\outR-1.3mm) -- (\angle:\outR-1.3mm-2.3mm)
+            (\angle+3.75:\outR-1.3mm) -- (\angle+3.75:\outR-1.3mm-1.15mm);
+    }
     % Sectors
     \foreach \lcolor/\lwidth in {black/2.6mm,white/2mm} {
     \begin{scope}[every path/.style={draw=\lcolor,line width=\lwidth}]
@@ -95,7 +73,8 @@
               (0:\outR)     -- (0:\insR)     arc(0:180:\insR)       ;
         \draw (0:\insR)     -- (0:\outR)     arc(0:-60:\outR)       --
               (-60:\outR)   -- (-60:\insR)   arc(-60:0:\insR)       ;
-        \draw (300:\insR)   -- (300:\outR)   arc(300:180:\outR)     --
+        \draw (300:\insR)   -- (300:\midR)   arc(300:240:\midR)     --
+              (240:\midR)   -- (240:\outR)   arc(240:180:\outR)     --
               (180:\outR)   -- (180:\insR)   arc(180:300:\insR)     ;
         \draw (150:\midR)   -- (150:\outR)   arc(150:127.5:\outR)   --
               (127.5:\outR) -- (127.5:\midR) arc(127.5:150:\midR)   ;
@@ -104,23 +83,86 @@
     \end{scope}
     }
     % (Cover up external lines)
-    \draw[line width=1mm,draw=white] (0,0) circle (\outR+1.15mm);
-    \draw[line width=1mm,draw=white] (0,0) circle (\insR-1.15mm);
+    \newcommand{\clearcol}{white}
+    % \renewcommand{\clearcol}{green}
+    \draw[line width=1mm,draw=\clearcol] (0,0) circle (\outR+1.15mm);
+    \draw[line width=1mm,draw=\clearcol] (0,0) circle (\insR-1.15mm);
+    \path[fill=\clearcol]
+        (300:\midR) -- (300:\outR+1.3mm) arc(300:240:\outR+1.3mm) --
+        (240:\outR+1.3mm) -- (240:\midR) arc(240:300:\midR);
     % Labels
     \foreach \phi/\label in {180/Write,153.75/Morn,123.75/Read,93.75/Noon,%
         48.75/Work,345/Eve,225/Sleep} {
         \path[postaction={decorate,decoration={text align={center},%
-            raise={4mm},text along path,text={|\Huge\textlino|\label}}}]
+            raise={4mm},text along path,text={|\huge\textgothic|\label}}}]
             (\phi:\outR) arc (\phi:\phi-30:\outR);
-        }
-    % arc(0:-60:\outR) node[pos=0.25,sloped,above] {Evening}
-    % arc(300:180:\outR) node[pos=0.875,sloped,above] {Sleeping}
+    }
 
-    % POINTER
-    \path[fill=white] (277.5:100.1mm) -- (276.5:97.9mm) -- (278.5:97.9mm);
-    
+    % PANEL
+    \node at (270:48mm) {\includegraphics[width=30mm]{sign.png}};
+    % move this down?
+    \path[postaction={decorate,decoration={text align={center},%
+        text along path,text={|\Large\textblack|24 HOUR WORLD CLOCK}}}]
+        (240:75mm) arc (240:300:75mm);
+    \fill (270:68mm) -- (271:70mm) -- (269:70mm);
+    \fill (270:58mm) -- (271:56mm) -- (269:56mm);
+    \draw[dashed,line width=0.3mm]
+        (262.5:68mm) -- (262.5:58mm) arc(262.5:277.5:58mm) --
+        (277.5:58mm) -- (277.5:68mm) arc(277.5:262.5:68mm) ;
+    \path[postaction={decorate,decoration={text align={right},text along
+        path,text={|\sffamily|RIM OFFSET}}}]
+        (240:64mm) arc (240:260:64mm);
+    \path[postaction={decorate,decoration={text align={left},text along
+        path,text={|\sffamily|FROM LOCAL}}}]
+        (280:64mm) arc (280:300:64mm);
+    % THE EXAMPLE
+    \path[postaction={decorate,decoration={text align={center},text along
+        path,text={|\sffamily|+00/-24}}}]
+        (262.5:64mm) arc (262.5:277.5:64mm);
+    \fill (270:68mm) -- (271:66mm) -- (269:66mm);
+    \fill (270:58mm) -- (271:60mm) -- (269:60mm);
 \end{tikzpicture}
-\end{center}
+    
+\begin{tikzpicture}
+    % BORDER
+    \draw[dashed] (-110mm,-110mm) rectangle (110mm,110mm);
+    \draw[fill] (0,0) circle [radius=20mm];
+    \draw[dashed,white] (0,0) circle [radius=3mm];
+
+    % INNER TIMEZONE ALIGNMENT
+    % Timezones
+    \foreach [count=\i] \plus/\minus in {%
+            00/24,01/23,02/22,03/21,04/20,05/19,
+            06/18,07/17,08/16,09/15,10/14,11/13,
+            12/12,13/11,14/10,15/09,16/08,17/07,
+            18/06,19/05,20/04,21/03,22/02,23/01%
+    } {
+        \path[postaction={decorate,decoration={text align={center},text
+            along path,text={|\sffamily|+\plus/-\minus}}}]
+            (247.5+15*\i:64mm) arc (247.5+15*\i:262.5+15*\i:64mm);
+        \fill (270+15*\i:68mm) -- (271+15*\i:66mm) -- (269+15*\i:66mm);
+        \fill (270+15*\i:58mm) -- (271+15*\i:60mm) -- (269+15*\i:60mm);
+    }
+    
+    % OUTER RIM
+    % Background
+    \draw[fill=black,draw=white,line width=.4mm]
+        (180:101.5mm) -- (180:108.5mm) arc (180:360:108.5mm)
+        (360:108.5mm) -- (360:101.5mm) arc (360:180:101.5mm);
+    % Numerals
+    \foreach \angle/\label/\xscale in {%
+            270/0/1,255/1/1,240/2/1,225/3/1,210/4/1,195/5/1,%
+            180/6/1,165/7/1,150/8/1,135/9/1,120/X/1,105/3/-1%
+    } {
+        \node[rotate=\angle-90,scale=3,inner sep=0pt,xscale=\xscale]
+            at (\angle:105mm) {\contour{white}{\label}};
+        \node[rotate=\angle+90,scale=3,inner sep=0pt,xscale=\xscale]
+            at (\angle-180:105mm) {\contour{white}{\label}};
+    }
+    % Borders
+    \draw [line width=1mm] (0,0) circle [radius=110mm-1mm];
+    \draw [line width=1mm] (0,0) circle [radius=100mm+1mm];
+\end{tikzpicture}
         
 % VARIOUS TRANSDECIMALS
 % \begin{center}
