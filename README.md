@@ -37,7 +37,7 @@ The numerals use a [dozenal](https://en.wikipedia.org/wiki/Duodecimal) (base
 12) system, because I prefer the look, and I'm the only one who has to read
 this clock. I'm using letters X for ten and E (reflected 3) for eleven.
 
-![](numerals.png)
+![](diagrams/numerals.png)
 
 I don't really like the popular conventions for the transdecimal numerals
 ten and eleven (though I understand their appeal and accept their popularity).
@@ -65,7 +65,7 @@ status, since it's a 24 hour clock).
 The world time at any other local time can be readily assessed by looking at
 other points around the dial.
 
-![](dials.png)
+![](diagrams/dials.png)
 
 
 Fonts
