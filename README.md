@@ -11,6 +11,12 @@ and a few other things.
 * A second dial shows a time in another time zone with a configurable offset,
   for immediate time reading across time zones.
 
+The clock face is currently being designed in this repository:
+
+![](clock.png)
+
+The outer rim rotates independently and the outer numbers then represent the
+time in another time zone (see below).
 
 Project notes
 -------------
@@ -19,13 +25,10 @@ TODO List:
 
 * [x] Select and order 24 hour mechanism and clock hands
 * [x] Design clock face and dial
-* [ ] Print clock face and assemble clock
+* [x] Iterate dial design
+* [x] Order dial and bezel
+* [ ] Print clock face on good paper and assemble clock
 * [ ] Incorporate into wall dashboard (with barometer and thermometer)
-
-The clock face is currently being designed in this repository. It currently
-looks something like this:
-
-![](clock.png)
 
 
 Design notes
@@ -79,17 +82,16 @@ Fonts
 Clock parts
 -----------
 
-Apart from the face, I ordered the clock parts from letsmaketime in
-Queensland.
+This is not just a design, I'm making a real clock for my wall. Apart from
+the face, which I'll print on some cream paper or something, I ordered the
+clock parts from letsmaketime in Queensland:
 
 * [24hr clock movement](https://www.letsmaketime.com.au/shop/item/24-hour-clock-movement-3mm-6mm---qc-24/high-torque)
-* [Clock hands](https://www.letsmaketime.com.au/shop/item/retro-german-clock-hands-147mm)
-  (I'll use just the hour hand, I guess).
+* Hands (cut down to fit inside)
+  * probably [this hour hand](https://www.letsmaketime.com.au/shop/item/large-clock-hands-175mm-hth180)
+  * or possibly [this hour hand](https://www.letsmaketime.com.au/shop/item/retro-german-clock-hands-147mm)
+* [Glass and brass bezel](https://www.letsmaketime.com.au/shop/item/hinged-dial-glassbrass-bezel-ivory-arabic-215-copy)
 
-Looking for bezels. Considering:
-
-* https://www.letsmaketime.com.au/shop/item/hinged-dial-glassbrass-bezel-ivory-arabic-215-copy
-* https://www.letsmaketime.com.au/shop/item/hinged-dial-with-brass-bezel-ivory-roman (a little big...!)
 
 License
 -------
