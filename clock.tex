@@ -13,11 +13,24 @@
 \contournumber{64}
 
 % FONTS
+% gothic font for schedule titles
 \usepackage{addfont}
 \addfont[1]{OT1}{hge}{\textgothic}
-\usepackage{fontspec}
-\newfontface\textblack{QTHelvet-Black}
+
+% thin sf font for offset/local
 \usepackage{cabin}
+
+% big bold font version for world clock title
+\usepackage[T1]{fontenc}
+% \renewcommand*\sfdefault{ugq}
+% ^ no! that clashes with cabin for the whole document!
+% I need a local change instead:
+\newcommand{\textblack}{\fontfamily{ugq}\fontseries{b}\selectfont}
+
+
+% this didn't work with the printer!! Trying another...
+% \usepackage{fontspec}
+% \newfontface\textblack{QTHelvet-Black}
 
 \begin{document}
 \noindent\begin{tikzpicture}
@@ -30,7 +43,7 @@
     % NUMBERS
     % Background
     \draw[fill=black,draw=white,line width=1.4mm]
-        (180:72mm) -- (180:88mm) arc (180:360:88mm)
+        (180:72mm) -- (180:88mm) arc (180:360:88mm) --
         (360:88mm) -- (360:72mm) arc (360:180:72mm);
     % Numerals
     \contourlength{0.1mm} % set to one 7th (scale) of the desired width
@@ -102,10 +115,6 @@
     % PANEL
     % signature
     \node at (270:39mm) {\includegraphics[width=30mm]{sign.png}};
-    % title
-    \path[postaction={decorate,decoration={text align={center},%
-        text along path,text={|\Large\textblack|24 HOUR WORLD CLOCK}}}]
-        (240:65mm) arc (240:300:65mm);
     % offset information and blank
     \path[postaction={decorate,decoration={text align={right},text along
         path,text={|\sffamily\small|RIM OFFSET}}}]
@@ -117,6 +126,11 @@
         path,text={|\sffamily\small|FROM LOCAL}}}]
         (280:54mm) arc (280:300:54mm);
     \fill (270:58mm) -- (271:60mm) -- (269:60mm);
+    % title
+    \renewcommand*\sfdefault{ugq}
+    \path[postaction={decorate,decoration={text align={center},%
+        text along path,text={|\Large\textblack|24 HOUR WORLD CLOCK}}}]
+        (240:65mm) arc (240:300:65mm);
 
     % THE EXAMPLE
     \path[postaction={decorate,decoration={text align={center},text along
@@ -153,7 +167,7 @@
     % OUTER RIM
     % Background
     \draw[fill=black,draw=white,line width=0.9mm+0.1mm]
-        (180:91.5mm) -- (180:98.5mm) arc (180:360:98.5mm)
+        (180:91.5mm) -- (180:98.5mm) arc (180:360:98.5mm) --
         (360:98.5mm) -- (360:91.5mm) arc (360:180:91.5mm);
     % Numerals
     \contourlength{0.15mm} % set to one 3rd (scale) of the desired width
