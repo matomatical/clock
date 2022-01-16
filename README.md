@@ -13,7 +13,7 @@ and a few other things.
 
 The clock face is currently being designed in this repository:
 
-![](clock.png)
+![](diagrams/clock.png)
 
 The outer rim rotates independently and the outer numbers then represent the
 time in another time zone (see below).
